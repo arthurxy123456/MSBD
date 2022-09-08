@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <script src='./vue.js'></script>
+    <link rel="stylesheet" href="app.css">
+    <!-- 引入jsList -->
+    <script src="./questions/jsList.js"></script>
+    <!-- 引入cssList -->
+    <script src="./questions/cssList.js"></script>
+    <!-- 引入vueList -->
+    <script src="./questions/vueList.js"></script>
+    <script src="./questions/reactList.js"></script>
+    <!-- 混入mixin -->
+    <script src="./mixin/mixin.js"></script>
+    <title>面试宝典</title>
+
+</head>
+
+<body>
+    <div id='app'>
+        <div class="header">面试宝典</div>
+        <div class="myinput">
+            <div class="search">
+                面试题关键字:
+                <input type="text" v-model="keywords" placeholder="请输入面试题关键字">
+                <img @click="showHelp" src="./imgs/help.png">
+                <div @click="setTestMode" class="test">
+                    <h5>自测模式</h5> 
+                    <div class="default" :class="{select:testMode}"></div>
+                </div>
+                <button @click="qus_block" 
+                class="random_qus">随机出题</button>
+                <button @click="goonRecite" 
+                class="random_qus">继续背题</button>
+                
+            </div>
+            <div class="tabs">
+                <button @click="change(index)" class="default" :class="{select:selectindex==index}"
+                    v-for="(item,index) in tabsList">
+                    {{item}}
+                </button>
+            </div>
+        </div>
+        <div class="content">
+            <div v-show="isShowList" v-for="item in search()">
+                <h3 class="question">{{item.question}}</h3>
+                <div v-show="!testMode" class="answer" v-html="item.answer"></div>
+            </div>
+
+            <div v-show="!isShowList" class="qus">
+                <div style="display: flex;align-items: center;">
+                    <h3 class="question">{{qus.question}}</h3>
+                    <button 
+                    @click="isShowAns=!isShowAns"
+                    style="height: 30px;">
+                        {{isShowAns?'隐藏':'显示'}}答案
+                    </button>
+                </div>
+                
+                <div v-show="isShowAns" 
+                class="answer" 
+                v-html="qus.answer"></div>
+            </div>
+        </div>
+
+    </div>
+    <script type="module">
+        Vue.config.productionTip = false;
+        var vm = new Vue({
+            el: '#app',
+            data() {
+                return {
+                    /* 当前选中面试题类型 */
+                    selectindex: 0,
+                    keywords: '',
+                    /* 面试题数据列表 */
+                    list: [...jsList, ...cssList, ...vueList,...reactList],
+                    tabsList: ['全部', 'javascript', 'css', 'vue','react'],
+                    /* 是否是测试模式 */
+                    testMode:false,
+                    /* 是否显示列表 */
+                    isShowList:true,
+                    /* 随机的题目 */
+                    qus:{},
+                    /* 是否显示答案 */
+                    isShowAns:false,
+                    /* 拷贝的面试题 */
+                    qusList:[],
+                    /* 随机面试题的闭包函数 */
+                    qus_block:()=>{}
+
+                }
+            },
+            mixins: [mixin]
+        })
+    </script>
+</body>
+</html>

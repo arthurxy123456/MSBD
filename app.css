@@ -1,0 +1,86 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#app {
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.header {
+    background: skyblue;
+    height: 50px;
+    display: grid;
+    place-items: center;
+}
+
+.myinput>.search {
+    margin: 20px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+}
+
+.myinput>.tabs {
+    margin: 20px;
+}
+.myinput>.tabs>.default{
+    height: 30px;
+    width: 120px;
+    margin-left: 10px;
+}
+.myinput>.tabs>.select{
+    background: orange;
+}
+
+.myinput>.search>input {
+    height: 25px;
+    width: 300px;
+}
+
+.myinput>.search>img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+}
+
+.myinput>.search>.test{
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.myinput>.search>.test>.default{
+    margin-left: 5px;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border: 3px solid #666;
+    border-radius: 50%;
+}
+.myinput>.search>.test>.select{
+    background: rgb(41, 201, 41);
+}
+
+.content {
+    flex: 1;
+    overflow-y: scroll;
+}
+
+.question {
+    margin: 20px;
+}
+
+.answer {
+    margin: 20px;
+    color: #4b5cc4;
+    width: 60vw;
+    word-wrap: break-word
+}
+
+.random_qus{
+    margin-left: 20px;
+}
